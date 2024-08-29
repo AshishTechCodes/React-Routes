@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import { useNavigate,useParams } from "react-router-dom";
-
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 const Products = () => {
-    const navigate = useNavigate();
-    let { userId } = useParams();
+  const navigate = useNavigate();
+  const { userId } = useParams();
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const products = [
     { id: 1, name: "Smartphone", price: 699.99 },
@@ -26,19 +26,27 @@ const Products = () => {
     { id: 18, name: "Coffee Maker", price: 79.99 },
     { id: 19, name: "Hair Dryer", price: 29.99 },
     { id: 20, name: "Electric Toothbrush", price: 59.99 }
-];
-  useEffect(()=>{
-    console.log(userId);
-  })
+  ];
+
+  useEffect(() => {
+    const productId = parseInt(userId);
+    const product = products.find(product => product.id === productId);
+    if (product) {
+      setSelectedProduct(product);
+    } else {
+      navigate('../NoMatch');
+    }
+  }, [userId, navigate, products]);
+
   return (
     <div className="container">
       <div className="title">
-        <h1>Order - {products.name}</h1>
+        <h1>Selected Product is {selectedProduct ? selectedProduct.name : "Not Found"}</h1>
       </div>
-      <button className="btn" onClick={() => navigate("order-summary")}>
+      <button className="btn" onClick={() => navigate(`../place-order?id=${userId}`)}>
         Place Order
       </button>
-      <br/>
+      <br />
       <button className="btn" onClick={() => navigate(-1)}>
         Go Back
       </button>

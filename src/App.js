@@ -8,6 +8,7 @@ import NoMatch from './components/NoMatch';
 import Products from './components/Products';
 import { Suspense } from 'react';
 import { lazy } from 'react';
+import PlaceOrder from './components/place_order';
 const App = () => {
   const Home = lazy(() => import('./components/home'));
   const About = lazy(() => import('./components/about'));
@@ -18,7 +19,8 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="Products/:slug" element={<Products />} />
+          <Route path="Products/:userId" element={<Products />} />
+          <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="*" element={<NoMatch/>}/>
         </Route>
       </Routes>
