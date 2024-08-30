@@ -4,8 +4,14 @@ const PlaceOrder = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Get a specific query parameter
-  const myParam = searchParams.get("id");
-  return <div>{myParam}</div>;
+  const id = searchParams.get("id");
+  const name = searchParams.get("name");
+  const price = searchParams.get("price");
+  return <div>
+    <p>Product ID: {id || "Not Provided"}</p>
+    <p>Product Name: {name || "Not Provided"}</p>
+    <p>Product Price: ₹{price || "Not Provided"}</p>
+  </div>;
 };
 
 export default PlaceOrder;

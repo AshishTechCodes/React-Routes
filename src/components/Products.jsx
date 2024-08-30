@@ -43,7 +43,7 @@ const Products = () => {
       <div className="title">
         <h1>Selected Product is {selectedProduct ? selectedProduct.name : "Not Found"}</h1>
       </div>
-      <button className="btn" onClick={() => navigate(`../place-order?id=${userId}`)}>
+      <button className="btn" onClick={() => navigate(`../place-order?id=${userId}&name=${selectedProduct.name}&price=${selectedProduct.price}`)}>
         Place Order
       </button>
       <br />
